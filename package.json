@@ -8,7 +8,7 @@
     "start:prod": "SET NODE_ENV=production & nodemon server.js",
     "debug": "ndb server.js",
     "watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js",
-    "build:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js"
+    "build:js": "parcel build ./public/js/index.js --out-dir ./public/js --out-file bundle.js"
   },
   "author": "omar",
   "license": "ISC",
@@ -30,7 +30,6 @@
     "morgan": "^1.10.0",
     "multer": "1.4.1",
     "nodemailer": "^6.6.5",
-    "parcel": "1.12.3",
     "pug": "^3.0.2",
     "sharp": "^0.29.2",
     "slugify": "^1.6.0",
@@ -47,6 +46,7 @@
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.4",
+    "parcel": "^1.12.3",
     "prettier": "^1.17.0"
   },
   "engines": {
