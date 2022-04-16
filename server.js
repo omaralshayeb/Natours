@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 
+//Handling uncaught exceptions
 process.on("uncaughtException", (err) => {
   console.log("UNCAUGHT EXCEPTION!! SHUTTING DOWN...");
   console.log(err.name, err.message);
@@ -15,7 +16,7 @@ const DB = process.env.DATABASE.replace(
   process.env.DATABASE_PASSWORD
 );
 
-//Connect to database
+//Connect to Database
 mongoose
   .connect(DB, {
     // .connect(process.env.DATABASE_LOCAL, {
@@ -26,10 +27,12 @@ mongoose
   .then(() => console.log("DB connection successful"));
 
 const port = process.env.PORT || 3000;
+//Run Server
 app.listen(port, () => {
   console.log(`App running on port ${port}`);
 });
 
+//Handling unhandled rejections (DB connection fail)
 process.on("unhandledRejection", (err) => {
   console.log("UNHANDLED REJECTION!! SHUTTING DOWN...");
   console.log(err.name, err.message);

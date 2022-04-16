@@ -29,11 +29,9 @@ app.set("views", path.join(__dirname, "views"));
 //Implement CORS
 app.use(cors());
 
-app.options('*',cors());
-
+app.options("*", cors());
 
 //Serving static files
-// app.use(express.static(`${__dirname}/public`));
 app.use(express.static(path.join(__dirname, "public")));
 
 //Set security http headers
@@ -77,6 +75,7 @@ app.use(
   })
 );
 
+//Compress for deployment
 app.use(compression());
 
 //Test middlewares
