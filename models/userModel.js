@@ -52,6 +52,7 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+//Hashing new passwords
 userSchema.pre("save", async function(next) {
   //Only run this function if password was actually modified
   if (!this.isModified("password")) return next();
@@ -64,14 +65,14 @@ userSchema.pre("save", async function(next) {
   next();
 });
 
-//Document middleware
+//When the Passord was changed?
 userSchema.pre("save", function(next) {
   if (!this.isModified("password") || this.isNew) return next();
   this.passwordChangedAt = Date.now() - 1000;
   next();
 });
 
-//Query middleware
+//Only active users (not deleted)
 userSchema.pre(/^find/, function(next) {
   //this points to the current query
   this.find({ active: { $ne: false } });
@@ -83,9 +84,11 @@ userSchema.methods.correctPassword = async function(
   candidatePassword,
   userPassword
 ) {
+  //entered regular passowrd ?= hashed passwordin DB
   return await bcrypt.compare(candidatePassword, userPassword);
 };
 
+//Did the user change his password after we gave him a token?
 userSchema.methods.changedPasswordAfter = function(JWTTimestamp) {
   if (this.passwordChangedAt) {
     const changedTimestamp = parseInt(
@@ -98,7 +101,7 @@ userSchema.methods.changedPasswordAfter = function(JWTTimestamp) {
   return false;
 };
 
-//A function that'll create a token to be sent through Email to user
+//Create new token due to password reset
 userSchema.methods.createPasswordResetToken = function() {
   const resetToken = crypto.randomBytes(32).toString("hex");
 

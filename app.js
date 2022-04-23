@@ -22,13 +22,13 @@ const app = express();
 
 app.enable("trust proxy");
 
+//View Engine
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
 //1) GLOBAL MIDDLEWARES
 //Implement CORS
 app.use(cors());
-
 app.options("*", cors());
 
 //Serving static files
@@ -89,11 +89,12 @@ app.use("/", viewRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/tours", tourRouter);
 app.use("/api/v1/reviews", reviewRouter);
-
+//Unregistered Routes
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server`));
 });
 
+//ERROR Handler
 app.use(globalErrorHandler);
 
 module.exports = app;

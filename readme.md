@@ -4,12 +4,17 @@ Natours is a tours management system for browsing and booking tours.
 
 ## Main Features
 
-- Browse all available tours and get all the details on each one.
-- A map functionality to preview the exact tour route.
-- Reviewing system to rate the tours.
-- User authentication system with JWTs.
-- Update user info with file uploading and password changeing functionalities.
-- Mailing service with Nodemailer.
+This App implements almost all the necessary Backend tasks and functionalities and more:
+
+- REST API with multiple resource endpoints.
+- Conrollers for all the CRUD operations on every resource.
+- Schema design and configuration with Mongoose.
+- Multiple API features like Pagination, filtering, sorting, fields limiting ...
+- Robust error handling mechanism with express.
+- Authentication and Authorization with JsonWebTokens (JWT) and Cookies.
+- Email functionality with Nodemailer.
+- Map functionality with Mapbox
+- File uploading with multer and image processing with Sharp.
 
 ## Stack
 
